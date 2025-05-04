@@ -1,0 +1,81 @@
+#!/bin/bash
+SILENT="N"
+DOYES="N"
+if [[  $1 =~ ^-[Yy]$ ]]; then
+  DOYES="Y"
+  SILENT="Y"
+fi
+optecho ()
+{
+   if [[ "X$SILENT" = "XN" ]]; then
+      echo $1
+   fi
+}
+optecho  "Allow browsers to access remote files via ssh/sftp in dolphin (KDE)"
+ 
+ISROOT=0
+if [ "$EUID" -ne 0 ]; then
+   optecho "!In order do something the script must be started with sudo!"
+else
+   ISROOT=1
+fi
+DOWAIT="N"
+if [[ "$1" == "-p" || "$2" == "-p" ]]; then
+  DOWAIT="Y"  
+fi
+
+MODDED=0
+
+SNAPARMORPOF=/var/lib/snapd/apparmor/profiles
+for f in snap.firefox.firefox snap.chromium.chromium snap.brave.brave
+do
+   PROFILE="$SNAPARMORPOF/$f"
+   if [ -f $PROFILE  ]; then
+      BNAME="${f##*.}"
+      optecho "Checking $BNAME"
+      grep -q "#kiosnappatch100" $PROFILE
+      if [ $? -eq 1 ]; then
+        optecho "[ ] $BNAME not patched"
+        if [[ $ISROOT -eq 1 ]]; then
+          if [[ "$DOYES" == "Y" ]]; then
+              sed -i.bak -E 's/^}$/\n \/run\/user\/** r,\n @{HOME}\/ibsserver\/** r,\n #kiosnappatch100  \n\n}/' $PROFILE
+              optecho "$BNAME snap modifed and patched"
+              MODDED=1
+              logger "$BNAME snap patched"
+	      if [ -f "$PROFILE.bak" ]; then
+		 rm "$PROFILE.bak"
+              fi 
+          else
+            read -p "Do you want to patch remote file access for $BNAME browser (Y/N)? " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+              sed -i.bak -E 's/^}$/\n \/run\/user\/** r,\n @{HOME}\/ibsserver\/** r,\n #kiosnappatch100  \n\n}/' $PROFILE
+              optecho "$BNAME snap modifed and patched"
+              MODDED=1
+              logger "$BNAME snap patched"
+	      if [ -f "$PROFILE.bak" ]; then
+		 rm "$PROFILE.bak"
+              fi 
+            fi
+          fi
+        fi
+      else
+        optecho "[✓] $BNAME is already patched"
+      fi
+   fi
+done
+
+if [[ $MODDED -eq 1 ]]; then
+    if [[ "$DOYES" == "Y" ]]; then
+        systemctl restart snapd.apparmor
+    else
+        read -p "We need to restart snapd.apparmor activate the patches. Do that now (Y/N)? " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            systemctl restart snapd.apparmor
+        fi
+    fi
+fi
+if [[ $DOWAIT == "Y" ]]; then
+  read -p "Press Enter to close the windows"
+fi

@@ -1,0 +1,12 @@
+[Unit]
+Description=swatchdog service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/swatchdog --config-file=/etc/swatch.conf --awk-field-syntax --tail-file=/var/log/syslog
+
+[Install]
+WantedBy=multi-user.target
