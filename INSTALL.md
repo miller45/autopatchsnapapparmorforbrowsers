@@ -16,4 +16,4 @@ systemctl enable swatch
 systemctl start swatch
 ```
 
-
+Hinweis: Vergiss nicht die aktuelle Version von ibsopen rueber zu kopieren
