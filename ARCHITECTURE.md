@@ -1,5 +1,5 @@
 # Background
-Browser installed via snap are also bundled with a bunch of security rules (use by apparmor), which folders the browser is allowed to access.
+Browser installed via snap are also bundled with a bunch of security rules (used by apparmor), which folders the browser is allowed to access.
 These apparmor security rules are kept on a seperate location than the usual apparmor settings (and also a seperate snapd.apparmor service is running them).
 If you want to allow your browser to read a unusual location (like /var/run) the apparmor rules for that browser need to adapted.
 The challenge is, that they are overwritted whenever a snap for a browser is updated. That happens often.
