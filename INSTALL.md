@@ -2,7 +2,7 @@
 ### to install as a service...
 
 Download latest version of files via clicking on the tar.gz icon here https://github.com/miller45/autopatchsnapapparmorforbrowsers/tags
-Extract the archive e.g. via `tar xzf v0.2.tgz` and change into the subdirectory `autopatchsnapapparmorforbrowsers-0.2'.
+Extract the archive e.g. via `tar xzf v0.3.tgz` and change into the subdirectory `autopatchsnapapparmorforbrowsers-0.3'.
 Then Use install skript or manual method
 #### Install script method
 Execute these lines:
