@@ -23,9 +23,9 @@ First install swatch via `apt install swatch`
 5) exec the following to enable and start swatch as a service
 ```
 systemctl daemon-reload
-systemctl enable swatch
-systemctl start swatch
+systemctl enable swatchdog
+systemctl start swatchdog
 ```
-Check if the service is running with this command: `systemctl status swatch`.
+Check if the service is running with this command: `systemctl status swatchdog`.
 
 Hinweis: Vergiss nicht die aktuelle Version von ibsopen (von deinem Rechner) rueber zu kopieren
