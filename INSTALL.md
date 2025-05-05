@@ -3,7 +3,15 @@
 
 Download latest version of files via clicking on the tar.gz icon here https://github.com/miller45/autopatchsnapapparmorforbrowsers/tags
 Extract the archive e.g. via `tar xzf v0.1.tgz` and change into the subdirectory `autopatchsnapapparmorforbrowsers-0.1'
+Then Use install skript or manual method
+#### Install script method
+Execute these lines:
+```
+chmod ugo+x ./install.sh
+sudo ./install.sh
+```
 
+#### Manual installation method
 Then do all the following steps as root (or via sudo)
 
 First install swatch via `apt install swatch`
