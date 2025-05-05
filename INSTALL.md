@@ -2,7 +2,7 @@
 ### to install as a service...
 
 Download latest version of files via clicking on the tar.gz icon here https://github.com/miller45/autopatchsnapapparmorforbrowsers/tags
-Extract the archive e.g. via `tar xzf v0.3.tgz` and change into the subdirectory `autopatchsnapapparmorforbrowsers-0.3'.
+Extract the archive e.g. via `tar xzf v0.4.tgz` and change into the subdirectory `autopatchsnapapparmorforbrowsers-0.4'.
 Then Use install skript or manual method
 #### Install script method
 Execute these lines:
@@ -23,8 +23,8 @@ First install swatch via `apt install swatch`
 5) exec the following to enable and start swatch as a service
 ```
 systemctl daemon-reload
-systemctl enable swatch
-systemctl start swatch
+systemctl enable swatchdog
+systemctl start swatchdog
 ```
 Check if the service is running with this command: `systemctl status swatch`.
 

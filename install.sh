@@ -21,11 +21,11 @@ else
      chown root:root /etc/swatch.conf
      echo "refresh systemd daemon"
      systemctl daemon-reload
-     echo "enable new swatch service"
-     systemctl enable swatch
-     echo "start swatch service"
-     systemctl start swatch
-     echo "status of swatch service is:"
-     systemctl status swatch
+     echo "enable new swatchdog service"
+     systemctl enable swatchdog
+     echo "start swatchdog service"
+     systemctl start swatchdog
+     echo "status of swatchdog service is:"
+     systemctl status swatchdog
    fi
 fi
